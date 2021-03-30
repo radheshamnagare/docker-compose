@@ -1,0 +1,85 @@
+version: '3.3'
+services:
+  mysqlcluster:
+    container_name: "mysql1"
+    image: mysql:5.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - ./mysql1:/var/lib/mysql
+    networks:
+      mysqlcluster:
+        ipv4_address: 172.28.0.2
+        
+    container_name: "mysql2"
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - ./mysql2:/var/lib/mysql
+    networks:
+      mysqlcluster:
+        ipv4_address: 172.28.0.3
+         
+    container_name: "mysql3"
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - ./mysql2:/var/lib/mysql   
+    networks:
+      mysqlcluster:
+        ipv4_address: 172.28.0.4
+        
+       
+  networks:
+   mysqlcluster:
+    - subnet: 172.28.0.0/16
+    -  gateway: 172.28.5.254  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
